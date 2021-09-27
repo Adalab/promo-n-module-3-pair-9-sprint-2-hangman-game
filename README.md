@@ -1,1 +1,1 @@
-# promo-n-module-3-pair-9-sprint-2-hangman-game
+# promo-n-module-3-pair-10-hangman-game
