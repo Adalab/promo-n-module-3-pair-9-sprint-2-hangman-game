@@ -4,23 +4,12 @@ import { useState } from 'react';
 function App() {
   const solution = ['k', 'a', 't', 'a', 'k', 'r', 'o', 'k', 'e', 'r'];
   const [letter, setLetter] = useState('');
-  const [word, setWord] = useState('katakroker');
+ 
   const [error, setError] = useState([]);
-  const rightLetters = [];
+  const [rightLetters, setRightLetters] = useState ([]);
 
 
-
-  /*const filterLetter = () =>{
-    letters.filter((each) =>{
-      if (letter === each){
-        return rightLetters.push(each);
-        
-      }console.log(rightLetters);
-    })
-  } */
-
-
-  const handleInput = (ev) => {
+   const handleInput = (ev) => {
  
     const inputValue = ev.target.value;
     setLetter(inputValue);
@@ -30,24 +19,34 @@ function App() {
     if (letterError === undefined) {
         if (inputValue !== '') {
           error.push(inputValue);
-          setError([error]);
+          setError([...error]);
+          }
+      }else{
+        if (inputValue !== '') {
+          rightLetters.push(inputValue);
+          setRightLetters([...rightLetters]);
         }
    }
+   console.log(error);
+   console.log(rightLetters)
   };
 //VER POR QUÉ NO COGE EL CONDICIONAL
 
   const renderSolutionLetters = () => {
-    const wordLetters = word.split(''); 
-    return wordLetters.map((eachLetter, i) => {
+   
+    return solution.map((eachLetter, i) => {
       
            
-    if(letter === eachLetter){
-
-           return( <li className='letter' key={i}>
+    if(rightLetters.find(each => {
+      return each === eachLetter 
+    })) {
+        
+          return( <li className='letter' key={i}>
             {eachLetter}
-            
-            </li>)
-        }else{
+           </li>) 
+        
+      
+      }else{
             return (<li className='letter' key={i}>
             </li>)
           }
@@ -69,11 +68,11 @@ function App() {
           <div className='feedback'>
             <h2 className='title'>Letras falladas:</h2>
             <ul className='letters'>
-              <li className='letter'></li>
-              <li className='letter'>q</li>
-              <li className='letter'>h</li>
-              <li className='letter'>p</li>
-              <li className='letter'>x</li>
+              <li className='letter'>{error[0]}</li>
+              <li className='letter'>{error[1]}</li>
+              <li className='letter'>{error[2]}</li>
+              <li className='letter'>{error[3]}</li>
+              <li className='letter'>{error[4]}</li>
             </ul>
           </div>
           <form className='form'>
